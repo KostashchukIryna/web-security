@@ -1,4 +1,4 @@
-package edu.lab.security.item;
+package edu.lab.security.book;
 
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 /*
   @author   kosta
   @project   security
-  @class  Item
+  @class  Book
   @version  1.0.0 
   @since 20.03.2025 - 00.09
 */
@@ -18,23 +18,23 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Item {
+public class Book {
     @Id
     private String id;
     private String name;
     private String description;
 
-    public Item(String name, String description) {
+    public Book(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Item item)) {
+        if (!(o instanceof Book book)) {
             return false;
         }
-        return Objects.equals(id, item.id);
+        return Objects.equals(id, book.id);
     }
 
     @Override
