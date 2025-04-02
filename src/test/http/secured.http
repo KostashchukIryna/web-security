@@ -6,14 +6,14 @@
 ###
 
  ### GET ONE BOOK
- GET http://localhost:8080/api/v1/books/67d738bc4560785d1cdc1a49
+ GET http://localhost:8080/api/v1/books/2
  Authorization: Basic admin admin
  Accept: application/json
  
  ###
  
  ### DELETE ONE BOOK
- DELETE http://localhost:8080/api/v1/books/67d855427608991df9dddf2a
+ DELETE http://localhost:8080/api/v1/books/3
  Authorization: Basic admin admin
  Accept: application/json
  
