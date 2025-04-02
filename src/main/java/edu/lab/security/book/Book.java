@@ -21,11 +21,11 @@ import org.springframework.data.annotation.Id;
 public class Book {
     @Id
     private String id;
-    private String name;
+    private String author;
     private String description;
 
-    public Book(String name, String description) {
-        this.name = name;
+    public Book(String author, String description) {
+        this.author = author;
         this.description = description;
     }
 
