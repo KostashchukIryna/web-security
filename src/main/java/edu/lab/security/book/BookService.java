@@ -20,10 +20,12 @@ public class BookService {
 
     @PostConstruct
     void init() {
-        books.add(new Book("1", "name1", "description"));
-        books.add(new Book("2", "name2", "description2"));
-        books.add(new Book("3", "name3", "description3"));
-        bookRepository.saveAll(books);
+        if (bookRepository.count() == 0) {
+            books.add(new Book("4", "name4", "description4"));
+            books.add(new Book("5", "name5", "description5"));
+            books.add(new Book("6", "name6", "description6"));
+            bookRepository.saveAll(books);
+        }
     }
 
     public List<Book> getAll() {
