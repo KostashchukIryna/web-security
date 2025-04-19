@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 /*
   @author   kosta
@@ -51,16 +52,19 @@ public class BookRestController {
     }
 
     @GetMapping("/hello-user")
+    @PreAuthorize("hasRole('USER')")
     public String helloUser() {
         return "Hello User!";
     }
 
     @GetMapping("/hello-admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public String helloAdmin() {
         return "Hello Admin!";
     }
 
     @GetMapping("hello-unknown")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String helloUnknown() {
         return "Hello Unknown!";
     }
@@ -78,5 +82,10 @@ public class BookRestController {
     @GetMapping("/view/stats")
     public String viewStats() {
         return "Here are the detailed stats. (Access granted only for SUPERADMIN)";
+    }
+
+    @GetMapping("hello/stranger")
+    public String helloStranger() {
+        return "Hello Stranger!";
     }
 }
