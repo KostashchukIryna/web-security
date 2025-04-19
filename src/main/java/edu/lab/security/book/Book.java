@@ -18,7 +18,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Book {
+public class Book extends AuditMetaData{
     @Id
     private String id;
     private String author;
