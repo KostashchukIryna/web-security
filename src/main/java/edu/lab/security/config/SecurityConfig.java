@@ -36,19 +36,19 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(req ->
                 req.requestMatchers("/index.html").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
-                    .requestMatchers(HttpMethod.GET, "/api/v1/workers/{id}").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
-                    .requestMatchers(HttpMethod.POST, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/v1/workers/{id}").hasRole("SUPERADMIN") // DELETE доступно лише SUPERADMIN
-                    .requestMatchers("/api/v1/workers/hello-admin").hasRole("ADMIN")
-                    .requestMatchers("/api/v1/workers/hello/superadmin").hasRole("SUPERADMIN")
-                    .requestMatchers("/api/v1/workers/hello-user").hasRole("USER")
-                    .requestMatchers("/api/v1/workers/hello-unknown").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/books").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
+                    .requestMatchers(HttpMethod.GET, "/api/v1/books/{id}").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
+                    .requestMatchers(HttpMethod.POST, "/api/v1/books").hasAnyRole("ADMIN", "SUPERADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/books").hasAnyRole("ADMIN", "SUPERADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/books/{id}").hasRole("SUPERADMIN") // DELETE доступно лише SUPERADMIN
+                    .requestMatchers("/api/v1/books/hello-admin").hasRole("ADMIN")
+                    .requestMatchers("/api/v1/books/hello/superadmin").hasRole("SUPERADMIN")
+                    .requestMatchers("/api/v1/books/hello-user").hasRole("USER")
+                    .requestMatchers("/api/v1/books/hello-unknown").permitAll()
 
-                    .requestMatchers("/api/v1/workers/view/profile").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
-                    .requestMatchers("/api/v1/workers/view/dashboard").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers("/api/v1/workers/view/stats").hasRole("SUPERADMIN")
+                    .requestMatchers("/api/v1/books/view/profile").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
+                    .requestMatchers("/api/v1/books/view/dashboard").hasAnyRole("USER", "ADMIN")
+                    .requestMatchers("/api/v1/books/view/stats").hasRole("SUPERADMIN")
                     .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults());
         return http.build();
