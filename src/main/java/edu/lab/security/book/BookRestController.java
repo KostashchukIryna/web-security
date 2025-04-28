@@ -63,6 +63,12 @@ public class BookRestController {
         return "Hello Admin!";
     }
 
+    @GetMapping("/hello/superadmin")
+    @PreAuthorize("hasRole('SUPERADMIN')")
+    public String helloSuperAdmin() {
+        return "Hello SuperAdmin!";
+    }
+
     @GetMapping("hello-unknown")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String helloUnknown() {

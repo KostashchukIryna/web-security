@@ -1,8 +1,10 @@
 package edu.lab.security.config;
 
 import org.springframework.aop.Advisor;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +29,8 @@ import org.springframework.http.HttpMethod;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
     public static Advisor preAuthorizeMethodInterceptor() {
         return AuthorizationManagerBeforeMethodInterceptor.preAuthorize();
     }
@@ -41,19 +45,19 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(req ->
                 req.requestMatchers("/index.html").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
-                    .requestMatchers(HttpMethod.GET, "/api/v1/workers/{id}").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
-                    .requestMatchers(HttpMethod.POST, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/api/v1/workers/{id}").hasRole("SUPERADMIN") // DELETE доступно лише SUPERADMIN
-                    .requestMatchers("/api/v1/workers/hello-admin").hasRole("ADMIN")
-                    .requestMatchers("/api/v1/workers/hello/superadmin").hasRole("SUPERADMIN")
-                    .requestMatchers("/api/v1/workers/hello-user").hasRole("USER")
-                    .requestMatchers("/api/v1/workers/hello-unknown").permitAll()
-
-                    .requestMatchers("/api/v1/workers/view/profile").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
-                    .requestMatchers("/api/v1/workers/view/dashboard").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers("/api/v1/workers/view/stats").hasRole("SUPERADMIN")
+//                    .requestMatchers(HttpMethod.GET, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
+//                    .requestMatchers(HttpMethod.GET, "/api/v1/workers/{id}").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
+//                    .requestMatchers(HttpMethod.POST, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
+//                    .requestMatchers(HttpMethod.PUT, "/api/v1/workers").hasAnyRole("ADMIN", "SUPERADMIN")
+//                    .requestMatchers(HttpMethod.DELETE, "/api/v1/workers/{id}").hasRole("SUPERADMIN") // DELETE доступно лише SUPERADMIN
+//                    .requestMatchers("/api/v1/workers/hello-admin").hasRole("ADMIN")
+//                    .requestMatchers("/api/v1/workers/hello/superadmin").hasRole("SUPERADMIN")
+//                    .requestMatchers("/api/v1/workers/hello-user").hasRole("USER")
+//                    .requestMatchers("/api/v1/workers/hello-unknown").permitAll()
+//
+//                    .requestMatchers("/api/v1/workers/view/profile").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
+//                    .requestMatchers("/api/v1/workers/view/dashboard").hasAnyRole("USER", "ADMIN")
+//                    .requestMatchers("/api/v1/workers/view/stats").hasRole("SUPERADMIN")
                     .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults());
         return http.build();
