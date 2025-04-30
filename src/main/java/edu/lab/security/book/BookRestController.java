@@ -85,6 +85,7 @@ public class BookRestController {
         return "Welcome to the dashboard. (Access granted for USER, ADMIN)";
     }
 
+    @PreAuthorize("hasRole('SUPERADMIN')")
     @GetMapping("/view/stats")
     public String viewStats() {
         return "Here are the detailed stats. (Access granted only for SUPERADMIN)";
