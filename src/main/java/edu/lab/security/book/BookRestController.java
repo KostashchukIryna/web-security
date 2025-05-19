@@ -52,40 +52,42 @@ public class BookRestController {
     }
 
     @GetMapping("/hello-user")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String helloUser() {
         return "Hello User!";
     }
 
     @GetMapping("/hello-admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String helloAdmin() {
         return "Hello Admin!";
     }
 
     @GetMapping("/hello/superadmin")
-    @PreAuthorize("hasRole('SUPERADMIN')")
+    @PreAuthorize("hasAuthority('SUPERADMIN')")
     public String helloSuperAdmin() {
         return "Hello SuperAdmin!";
     }
 
     @GetMapping("hello-unknown")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public String helloUnknown() {
         return "Hello Unknown!";
     }
 
     @GetMapping("/view/profile")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'SUPERADMIN')")
     public String viewProfile() {
         return "This is your profile information. (Access granted for USER, ADMIN, SUPERADMIN)";
     }
 
     @GetMapping("/view/dashboard")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public String viewDashboard() {
         return "Welcome to the dashboard. (Access granted for USER, ADMIN)";
     }
 
-    @PreAuthorize("hasRole('SUPERADMIN')")
+    @PreAuthorize("hasAuthority('SUPERADMIN')")
     @GetMapping("/view/stats")
     public String viewStats() {
         return "Here are the detailed stats. (Access granted only for SUPERADMIN)";
