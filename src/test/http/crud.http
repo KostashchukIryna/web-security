@@ -1,0 +1,35 @@
+### GET all
+GET http://localhost:8080/api/v1/books
+
+###GET BY ID
+GET http://localhost:8080/api/v1/books/1
+
+###DELETE BY ID
+DELETE http://localhost:8080/api/v1/books/3
+
+###CREATE
+POST http://localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "name": "book4",
+  "author": "author4"
+}
+
+###PUT
+PUT http://localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "id": "4",
+  "author": "author-a"
+}
+
+###HELLO USER
+GET http://localhost:8080/api/v1/books/hello-user
+
+###HELLO ADMIN
+GET http://localhost:8080/api/v1/books/hello-admin
+
+###HELLO UNKNOWN
+GET http://localhost:8080/api/v1/books/hello-unknown
